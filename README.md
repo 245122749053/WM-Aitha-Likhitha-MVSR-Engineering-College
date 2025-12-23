@@ -154,9 +154,9 @@ The scope of this work is limited to system-level design and logic validation. W
 
 Therefore, the emphasis is placed on architectural correctness and decision logic rather than full hardware implementation.
 
-## 12. Simulation Note (Optional)
+## 12. Simulation Validation (Wokwi)
 
-If circuit-level simulation is performed, it is limited to validating sensor interfacing and fill-level computation logic. Network-layer behaviors such as LoRaWAN and MQTT are addressed at the architectural and protocol-design level.
+A basic ESP32-based simulation was developed in Wokwi to validate ultrasonic sensor interfacing and local fill-level computation logic. Network communication and backend processing are addressed at the system design level.
 
 ## 13. Future Work
 

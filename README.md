@@ -1,5 +1,5 @@
 # WM-Aitha-Likhitha-MVSR-Engineering-College
-Smart Waste Bin Monitoring & Collection Optimization System
+# Smart Waste Bin Monitoring & Collection Optimization System
 
 Virtual IoT Design Challenge – Technical Submission
 

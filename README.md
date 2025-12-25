@@ -97,7 +97,7 @@ Telemetry is transmitted at fixed intervals and immediately when the fill level 
 
 4. The backend ingests the data and stores it in a time-series database (conceptual).
 
-5.A rule-based processing engine evaluates bin status.
+5. A rule-based processing engine evaluates bin status.
 
 6. Bins exceeding the configured threshold are flagged for collection.
 

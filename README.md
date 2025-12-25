@@ -71,10 +71,12 @@ TCP or UDP (network dependent)
 Application Layer
 MQTT
 
-Topic Structure
+### Topic Structure
+
 city/<zone_id>/<bin_id>/telemetry
 
-Sample Telemetry Payload
+### Sample Telemetry Payload
+
 {
   "bin_id": "BIN_018",
   "fill_level": 81,

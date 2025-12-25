@@ -15,11 +15,11 @@ The proposed system is designed as a distributed IoT architecture, where each wa
 
 This design is developed under the assumption of:
 
-Sparse bin distribution
+- Sparse bin distribution
 
-Limited power availability
+- Limited power availability
 
-Need for scalable deployment
+- Need for scalable deployment
 
 These constraints influence the choice of low-power sensing, threshold-based reporting, and lightweight communication protocols.
 
@@ -31,21 +31,21 @@ Each waste bin is equipped with an ultrasonic distance sensor connected to a low
 
 The processed data is transmitted to a centralized backend system through a low-bandwidth IoT communication network.
 
-Architectural Layers
+### Architectural Layers
 
-Sensing Layer
+#### Sensing Layer
 Ultrasonic sensor for fill-level measurement
 
-Edge Layer
+#### Edge Layer
 ESP32-based microcontroller performing local computation and decision logic
 
-Communication Layer
+#### Communication Layer
 MQTT over Wi-Fi (simulation), extendable to LoRaWAN or NB-IoT in real-world deployment
 
-Backend Layer
+#### Backend Layer
 Data ingestion, processing, and storage services
 
-Application Layer
+#### Application Layer
 Dashboard for monitoring, visualization, and alerts
 
 This layered architecture simplifies maintenance, supports scalability, and allows future technology upgrades without redesigning the entire system.
@@ -62,13 +62,13 @@ The system uses a publish–subscribe communication model implemented using the 
 
 ### Protocol Stack
 
-Network Layer
+#### Network Layer
 Wi-Fi (simulation), LoRaWAN / NB-IoT (proposed)
 
-Transport Layer
+#### Transport Layer
 TCP or UDP (network dependent)
 
-Application Layer
+#### Application Layer
 MQTT
 
 ### Topic Structure

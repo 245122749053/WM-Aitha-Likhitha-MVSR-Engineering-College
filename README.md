@@ -54,13 +54,13 @@ This layered architecture simplifies maintenance, supports scalability, and allo
 
 The system uses a publish–subscribe communication model implemented using the MQTT protocol. MQTT was selected due to its:
 
-Lightweight message headers
+- Lightweight message headers
 
-Low bandwidth overhead
+- Low bandwidth overhead
 
-Suitability for constrained IoT devices
+- Suitability for constrained IoT devices
 
-Protocol Stack
+### Protocol Stack
 
 Network Layer
 Wi-Fi (simulation), LoRaWAN / NB-IoT (proposed)

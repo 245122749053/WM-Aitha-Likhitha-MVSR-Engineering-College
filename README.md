@@ -89,19 +89,19 @@ Telemetry is transmitted at fixed intervals and immediately when the fill level 
 
 ## 5. Data Flow & Processing Logic
 
-The ultrasonic sensor captures distance measurements at regular intervals.
+1. The ultrasonic sensor captures distance measurements at regular intervals.
 
-The edge node converts distance values into fill percentage using calibrated parameters.
+2. The edge node converts distance values into fill percentage using calibrated parameters.
 
-Telemetry data is published to the MQTT broker.
+3. Telemetry data is published to the MQTT broker.
 
-The backend ingests the data and stores it in a time-series database (conceptual).
+4. The backend ingests the data and stores it in a time-series database (conceptual).
 
-A rule-based processing engine evaluates bin status.
+5.A rule-based processing engine evaluates bin status.
 
-Bins exceeding the configured threshold are flagged for collection.
+6. Bins exceeding the configured threshold are flagged for collection.
 
-The dashboard updates bin status and alerts in near real time.
+7. The dashboard updates bin status and alerts in near real time.
 
 This pipeline ensures efficient processing while minimizing unnecessary data transmission.
 
@@ -109,11 +109,11 @@ This pipeline ensures efficient processing while minimizing unnecessary data tra
 
 Route optimization is handled using a priority-based approach rather than fully dynamic real-time routing.
 
-Only bins exceeding a predefined threshold (e.g., 80%) are treated as active collection nodes
+- Only bins exceeding a predefined threshold (e.g., 80%) are treated as active collection nodes
 
-Active bins are grouped based on geographic proximity
+- Active bins are grouped based on geographic proximity
 
-A shortest-path strategy is applied within each group
+- A shortest-path strategy is applied within each group
 
 This approach simplifies decision-making and aligns with real-world municipal waste collection practices, where routing decisions are typically made in batch schedules.
 
@@ -123,30 +123,30 @@ Since waste bins may operate on battery power, energy efficiency is a critical d
 
 The following strategies are adopted:
 
-Deep sleep operation of the microcontroller between sensing cycles
+- Deep sleep operation of the microcontroller between sensing cycles
 
-Periodic sensing intervals (e.g., every 30–60 minutes)
+- Periodic sensing intervals (e.g., every 30–60 minutes)
 
-Event-driven data transmission
+- Event-driven data transmission
 
-Use of low-power wide-area networks in deployment
+- Use of low-power wide-area networks in deployment
 
 These measures significantly extend battery life and reduce maintenance requirements.
 
 ## 8. Reliability & Fault Handling
-Sensor-Level Reliability
+### Sensor-Level Reliability
 
-Multiple samples are averaged to reduce noise
+- Multiple samples are averaged to reduce noise
 
-Temporal consistency checks detect obstructions
+- Temporal consistency checks detect obstructions
 
-Sudden abnormal readings are discarded as outliers
+- Sudden abnormal readings are discarded as outliers
 
-Network-Level Reliability
+### Network-Level Reliability
 
-Periodic heartbeat messages monitor node health
+- Periodic heartbeat messages monitor node health
 
-Nodes failing to report within a defined time window are flagged
+- Nodes failing to report within a defined time window are flagged
 
 These mechanisms improve data integrity and system robustness.
 
@@ -154,13 +154,13 @@ These mechanisms improve data integrity and system robustness.
 
 The system follows a star topology, where all bin nodes communicate with centralized gateways.
 
-Scalability Features
+### Scalability Features
 
-Supports deployment of 100+ bins across multiple zones
+- Supports deployment of 100+ bins across multiple zones
 
-Simple onboarding of additional nodes
+- Simple onboarding of additional nodes
 
-Centralized monitoring and control
+- Centralized monitoring and control
 
 This design minimizes network complexity while enabling large-scale expansion.
 
@@ -168,11 +168,11 @@ This design minimizes network complexity while enabling large-scale expansion.
 
 The proposed solution balances accuracy, cost, and scalability:
 
-Ultrasonic sensors provide sufficient accuracy at low cost
+- Ultrasonic sensors provide sufficient accuracy at low cost
 
-LoRaWAN / NB-IoT reduce power consumption and infrastructure cost
+- LoRaWAN / NB-IoT reduce power consumption and infrastructure cost
 
-Cloud-based processing allows flexible scaling
+- Cloud-based processing allows flexible scaling
 
 Overall, the system is technically feasible and suitable for smart city deployment.
 
@@ -186,11 +186,11 @@ Therefore, emphasis is placed on architectural correctness and decision logic ra
 
 A basic ESP32-based simulation was developed using Wokwi to validate:
 
-Ultrasonic sensor interfacing
+- Ultrasonic sensor interfacing
 
-Local fill-level computation
+- Local fill-level computation
 
-MQTT topic publishing logic
+- MQTT topic publishing logic
 
 Large-scale backend processing and routing behavior are addressed at the system design level.
 
@@ -198,13 +198,13 @@ Large-scale backend processing and routing behavior are addressed at the system 
 
 Future enhancements may include:
 
-Adaptive thresholding based on historical fill patterns
+- Adaptive thresholding based on historical fill patterns
 
-Seasonal variation analysis
+- Seasonal variation analysis
 
-Predictive analytics for proactive waste collection
+- Predictive analytics for proactive waste collection
 
-Integration with real-time geographic information systems
+- Integration with real-time geographic information systems
 
 ## 14. Conclusion
 

@@ -194,6 +194,17 @@ A basic ESP32-based simulation was developed using Wokwi to validate:
 
 Large-scale backend processing and routing behavior are addressed at the system design level.
 
+### Live Simulation
+
+The project is also available as a live Wokwi simulation:
+
+🔗 https://wokwi.com/projects/451305095419509761
+
+You can open this link to:
+- View the ESP32 circuit
+- Run the simulation
+- See sensor behavior and MQTT output
+
 ## 13. Future Work
 
 Future enhancements may include:

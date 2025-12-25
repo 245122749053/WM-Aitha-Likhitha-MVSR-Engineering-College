@@ -11,43 +11,65 @@ The objective of this project is to design a virtual IoT-based smart waste manag
 
 ## 2. System Overview
 
-The proposed system is designed as a distributed IoT architecture where each waste bin operates as an independent sensing node. Instead of continuously streaming data, the system follows a periodic and event-driven reporting approach to reduce power consumption and network load.
+The proposed system is designed as a distributed IoT architecture, where each waste bin operates as an independent sensing node. Instead of continuously streaming data, the system follows a periodic and event-driven reporting approach to reduce power consumption and network load.
 
-This design was developed under the assumption of sparse bin distribution and limited power availability, which influenced the selection of low-power communication technologies and threshold-based data transmission.
+This design is developed under the assumption of:
+
+Sparse bin distribution
+
+Limited power availability
+
+Need for scalable deployment
+
+These constraints influence the choice of low-power sensing, threshold-based reporting, and lightweight communication protocols.
 
 The overall focus of the system is on practical deployability rather than laboratory-scale demonstration.
 
 ## 3. System Architecture
 
-Each waste bin is equipped with an ultrasonic distance sensor connected to a low-power microcontroller such as an ESP32 or a LoRa-enabled node. The sensor measures the distance between the waste surface and the bin lid. Using a calibrated bin depth, the edge node computes the fill percentage locally.
+Each waste bin is equipped with an ultrasonic distance sensor connected to a low-power microcontroller such as ESP32. The sensor measures the distance between the waste surface and the bin lid. Using a calibrated bin depth, the edge node computes the fill percentage locally.
 
 The processed data is transmitted to a centralized backend system through a low-bandwidth IoT communication network.
 
 Architectural Layers
 
-Sensing Layer: Ultrasonic sensor for fill-level measurement
+Sensing Layer
+Ultrasonic sensor for fill-level measurement
 
-Edge Layer: ESP32 / LoRa-enabled microcontroller
+Edge Layer
+ESP32-based microcontroller performing local computation and decision logic
 
-Communication Layer: MQTT over LoRaWAN or NB-IoT
+Communication Layer
+MQTT over Wi-Fi (simulation), extendable to LoRaWAN or NB-IoT in real-world deployment
 
-Backend Layer: Data ingestion, processing, and storage
+Backend Layer
+Data ingestion, processing, and storage services
 
-Application Layer: Dashboard for monitoring and alerts
+Application Layer
+Dashboard for monitoring, visualization, and alerts
 
-This layered architecture simplifies maintenance and supports scalability.
+This layered architecture simplifies maintenance, supports scalability, and allows future technology upgrades without redesigning the entire system.
 
 ## 4. Communication & Protocol Design
 
-The system uses a publish–subscribe communication model implemented using the MQTT protocol. MQTT was selected due to its lightweight header, low bandwidth overhead, and suitability for constrained IoT devices.
+The system uses a publish–subscribe communication model implemented using the MQTT protocol. MQTT was selected due to its:
+
+Lightweight message headers
+
+Low bandwidth overhead
+
+Suitability for constrained IoT devices
 
 Protocol Stack
 
-Network Layer: LoRaWAN / NB-IoT
+Network Layer
+Wi-Fi (simulation), LoRaWAN / NB-IoT (proposed)
 
-Transport Layer: TCP or UDP (network dependent)
+Transport Layer
+TCP or UDP (network dependent)
 
-Application Layer: MQTT
+Application Layer
+MQTT
 
 Topic Structure
 city/<zone_id>/<bin_id>/telemetry
@@ -71,7 +93,7 @@ The edge node converts distance values into fill percentage using calibrated par
 
 Telemetry data is published to the MQTT broker.
 
-The backend ingests the data and stores it in a time-series database.
+The backend ingests the data and stores it in a time-series database (conceptual).
 
 A rule-based processing engine evaluates bin status.
 
@@ -83,17 +105,21 @@ This pipeline ensures efficient processing while minimizing unnecessary data tra
 
 ## 6. Route Optimization Strategy
 
-Route optimization is handled using a priority-based approach rather than a fully dynamic real-time routing algorithm. Only bins that exceed a predefined fill threshold (for example, 80%) are treated as active collection nodes.
+Route optimization is handled using a priority-based approach rather than fully dynamic real-time routing.
 
-Active bins are grouped based on geographic proximity, and a shortest-path strategy is applied within each group to reduce travel distance and collection time.
+Only bins exceeding a predefined threshold (e.g., 80%) are treated as active collection nodes
 
-This approach simplifies decision-making and aligns better with real-world municipal waste collection practices, where routing decisions are typically made in batches.
+Active bins are grouped based on geographic proximity
+
+A shortest-path strategy is applied within each group
+
+This approach simplifies decision-making and aligns with real-world municipal waste collection practices, where routing decisions are typically made in batch schedules.
 
 ## 7. Power Management Strategy
 
 Since waste bins may operate on battery power, energy efficiency is a critical design consideration.
 
-The following strategies are used:
+The following strategies are adopted:
 
 Deep sleep operation of the microcontroller between sensing cycles
 
@@ -101,7 +127,7 @@ Periodic sensing intervals (e.g., every 30–60 minutes)
 
 Event-driven data transmission
 
-Use of low-power wide-area networks
+Use of low-power wide-area networks in deployment
 
 These measures significantly extend battery life and reduce maintenance requirements.
 
@@ -110,7 +136,7 @@ Sensor-Level Reliability
 
 Multiple samples are averaged to reduce noise
 
-Temporal consistency checks are used to detect obstructions
+Temporal consistency checks detect obstructions
 
 Sudden abnormal readings are discarded as outliers
 
@@ -118,7 +144,7 @@ Network-Level Reliability
 
 Periodic heartbeat messages monitor node health
 
-Nodes that fail to report within a defined time window are flagged
+Nodes failing to report within a defined time window are flagged
 
 These mechanisms improve data integrity and system robustness.
 
@@ -138,11 +164,11 @@ This design minimizes network complexity while enabling large-scale expansion.
 
 ## 10. Cost & Feasibility Considerations
 
-The proposed solution balances accuracy, cost, and scalability.
+The proposed solution balances accuracy, cost, and scalability:
 
 Ultrasonic sensors provide sufficient accuracy at low cost
 
-LoRaWAN/NB-IoT reduce power consumption and infrastructure cost
+LoRaWAN / NB-IoT reduce power consumption and infrastructure cost
 
 Cloud-based processing allows flexible scaling
 
@@ -152,16 +178,32 @@ Overall, the system is technically feasible and suitable for smart city deployme
 
 The scope of this work is limited to system-level design and logic validation. While individual components such as sensors can be simulated, realistic evaluation of communication latency, packet loss, and large-scale system behavior requires physical deployment and network infrastructure.
 
-Therefore, the emphasis is placed on architectural correctness and decision logic rather than full hardware implementation.
+Therefore, emphasis is placed on architectural correctness and decision logic rather than full hardware implementation.
 
 ## 12. Simulation Validation (Wokwi)
 
-A basic ESP32-based simulation was developed in Wokwi to validate ultrasonic sensor interfacing and local fill-level computation logic. Network communication and backend processing are addressed at the system design level.
+A basic ESP32-based simulation was developed using Wokwi to validate:
+
+Ultrasonic sensor interfacing
+
+Local fill-level computation
+
+MQTT topic publishing logic
+
+Large-scale backend processing and routing behavior are addressed at the system design level.
 
 ## 13. Future Work
 
-Future enhancements may include adaptive thresholding based on historical fill patterns, seasonal variation analysis, and integration of predictive analytics for proactive waste collection.
+Future enhancements may include:
+
+Adaptive thresholding based on historical fill patterns
+
+Seasonal variation analysis
+
+Predictive analytics for proactive waste collection
+
+Integration with real-time geographic information systems
 
 ## 14. Conclusion
 
-This project demonstrates how IoT sensing, low-power communication, and priority-based routing can improve the efficiency of urban waste collection systems. The proposed design is scalable, reliable, and aligned with practical smart city deployment constraints.
+This project demonstrates how IoT sensing, low-power communication, and priority-based routing can significantly improve the efficiency of urban waste collection systems. The proposed design is scalable, reliable, and aligned with practical smart city deployment constraints.
